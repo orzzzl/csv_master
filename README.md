@@ -44,7 +44,7 @@ If you do ./csv_master -c 0+2 -o output.txt sample.csv<br>
 Then it will add each number in colume 0 with each number in colume 2 and create a new colume.<br>
 The resule will be:
 
-line   0      1      2      3    new
+line   0      1      2      3    new<br>
 0:     1      3      4      5  5.000000<br>
 1:     2      3      1      2  3.000000<br>
 2:     2      6      2      1  4.000000<br>
