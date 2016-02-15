@@ -23,7 +23,7 @@ public:
   vector<string> header_names;
   vector<record> recs;
   int line_num, num_of_cols;
-  // need the file name of input csv
+  
   csv_master(const string &file_name, string &out_file_name, bool has_header_);
 
   // show stats for a specific colume
