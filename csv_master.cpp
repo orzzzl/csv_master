@@ -43,6 +43,7 @@ void csv_master::initial_setup(const string &line) {
       buf.push_back(ele);
     }
   }
+  // set header names if specified
   if (has_header) {
     header_names.push_back(buf);
   } else {
@@ -50,6 +51,7 @@ void csv_master::initial_setup(const string &line) {
   }
 }
 
+// output the processed csv file.
 void csv_master::print_all(const set<int> &st) {
   while (recs[0].content.size() > header_names.size()) header_names.push_back("new");
   bool init = true;
@@ -65,13 +67,14 @@ void csv_master::print_all(const set<int> &st) {
   }
 }
 
-
+// create a new colume to store the resule the operation
 void csv_master::create_col(int col1, int col2, char op) {
   for (auto &rc : recs) {
     rc.add_col(col1, col2, op);
   }
 }
 
+// print stats about specified colume to stdout
 void csv_master::show_stats(int col_no) {
   if (col_no < 0 || col_no >= stats_of_cols.size()) {
     cout << "col number out of bound\n";
@@ -81,7 +84,8 @@ void csv_master::show_stats(int col_no) {
 }
 
 
-
+// This function only called when doing outer join. You should add records which may not 
+// originally existed.
 void csv_master::add_new_records(const csv_master &other, int col_no) {
   set<string> st;
   for (auto i : recs) {
@@ -108,6 +112,7 @@ void csv_master::add_new_records(const csv_master &other, int col_no) {
   }
 }
 
+// Doing the join operation
 void csv_master::join(const csv_master &other, bool outer, int col_no) {
   map<string, record> exist;
   for (auto i : other.recs) {
