@@ -13,7 +13,7 @@ record::record(int _line_number_) : line_num(_line_number_) {
   values.clear();
 }
 
-
+// add a word to the record, at updates the stats for colume at the same time.
 void record::input_word(string &word, stats &stats_of_the_col) {
   content.push_back(word);
   if (is_valid_number(word)) {
@@ -26,7 +26,7 @@ void record::input_word(string &word, stats &stats_of_the_col) {
     values.push_back(0.0);
   }
 }
-
+// add a word without updating the stats for colume
 void record::input_word(string &word) {
   content.push_back(word);
   if (is_valid_number(word)) {
@@ -39,6 +39,7 @@ void record::input_word(string &word) {
   }
 }
 
+// read a raw line separated by ',' and process this line
 void record::input_line(const string &input, vector<stats> &stats_of_cols) {
   string buf;
   int col_no = 0;
@@ -53,6 +54,7 @@ void record::input_line(const string &input, vector<stats> &stats_of_cols) {
   input_word(buf, stats_of_cols[col_no]);
 }
 
+// print this record to the output file
 void record::report(const set<int> &st, ofstream &fout) {
   fout << line_num << ": ";
   for (int i = 0; i < content.size(); i++) {
@@ -64,6 +66,7 @@ void record::report(const set<int> &st, ofstream &fout) {
   fout << endl;
 }
 
+// add a new colume according to the expression
 void record::add_col(int col1, int col2, char op) {
   assert(col1 > 0 && col1 < content.size());
   assert(col2 > 0 && col2 < content.size());
