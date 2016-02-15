@@ -51,10 +51,14 @@ void csv_master::initial_setup(const string &line) {
 }
 
 void csv_master::print_all(const set<int> &st) {
-  fout << "line";
+  while (recs[0].content.size() > header_names.size()) header_names.push_back("new");
+  bool init = true;
   for (int i = 0; i < header_names.size(); i++) 
-    if (st.empty() || st.find(i) != st.end()) 
-      fout << setw(5) << header_names[i] << "  ";
+    if (st.empty() || st.find(i) != st.end()) {
+      if (init) init = false;
+      else fout << ",";
+      fout << "col_" << header_names[i];
+    }
   fout << endl;
   for (auto i : recs) {
     i.report(st, fout);
@@ -74,7 +78,6 @@ void csv_master::show_stats(int col_no) {
   } else {
     stats_of_cols[col_no].show(col_no);
   }
-  while (recs[0].content.size() > header_names.size()) header_names.push_back("new");  
 }
 
 
@@ -121,9 +124,9 @@ void csv_master::join(const csv_master &other, bool outer, int col_no) {
         recs.erase(recs.begin() + i);
       }
     } else {
-      for (auto ele : exist[recs[i].content[col_no]].content) {
-        if (recs[i].content[col_no] == ele) continue;
-        recs[i].input_word(ele);
+      for (int k = 0; k < exist[recs[i].content[col_no]].content.size(); k++) {
+        if (k == col_no) continue;
+        recs[i].input_word(exist[recs[i].content[col_no]].content[k]);
       }
       i++;
     }
@@ -134,5 +137,4 @@ void csv_master::join(const csv_master &other, bool outer, int col_no) {
     if (col_no == k) continue;
     stats_of_cols.push_back(other.stats_of_cols[k]);
   }
-  while (recs[0].content.size() > header_names.size()) header_names.push_back("new");
 }

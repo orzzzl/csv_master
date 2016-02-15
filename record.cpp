@@ -56,11 +56,13 @@ void record::input_line(const string &input, vector<stats> &stats_of_cols) {
 
 // print this record to the output file
 void record::report(const set<int> &st, ofstream &fout) {
-  fout << line_num << ": ";
+  bool init = true;
   for (int i = 0; i < content.size(); i++) {
     // only when this colume is in the selected list
     if (st.find(i) != st.end() or st.empty()) {
-      fout << setw(5) << content[i] << "  ";
+      if (init) init = false;
+      else fout << ",";
+      fout << content[i];
     }
   }
   fout << endl;
@@ -68,13 +70,13 @@ void record::report(const set<int> &st, ofstream &fout) {
 
 // add a new colume according to the expression
 void record::add_col(int col1, int col2, char op) {
-  assert(col1 > 0 && col1 < content.size());
-  assert(col2 > 0 && col2 < content.size());
+  assert(col1 >= 0 && col1 < content.size());
+  assert(col2 >= 0 && col2 < content.size());
   assert(op == '+' || op == '-' || op == 'x' || op == '/');
   double new_val;
   if (op == '+')  new_val = values[col1] + values[col2];
   if (op == '-')  new_val = values[col1] + values[col2];
-  if (op == '*')  new_val = values[col1] * values[col2];
+  if (op == 'x')  new_val = values[col1] * values[col2];
   if (op == '/') {
    // check the numerator is no smaller than eps such the result will not be 
    // infinte large.
