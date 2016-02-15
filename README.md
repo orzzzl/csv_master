@@ -21,9 +21,9 @@ For example, if the original csv file is:
 
 sample.csv:
 
-1,3,4,5
-2,3,1,2
-2,6,2,1
+1,3,4,5  <br>
+2,3,1,2  <br>
+2,6,2,1  <br>
 
 And you want to select colume 0,1,2
 You can either do ./csv_master -s 0-2 -o output.txt sample.csv
@@ -36,9 +36,9 @@ For example:
 
 sample.csv:
 
-1,3,4,5
-2,3,1,2
-2,6,2,1
+1,3,4,5  <br>
+2,3,1,2  <br>
+2,6,2,1  <br>
 
 If you do ./csv_master -c 0+2 -o output.txt sample.csv
 Then it will add each number in colume 0 with each number in colume 2 and create a new colume.
