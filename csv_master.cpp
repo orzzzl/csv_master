@@ -52,7 +52,9 @@ void csv_master::initial_setup(const string &line) {
 
 void csv_master::print_all(const set<int> &st) {
   fout << "line";
-  for (auto i : header_names) fout << setw(10) << i << "\t";
+  for (int i = 0; i < header_names.size(); i++) 
+    if (st.empty() || st.find(i) != st.end()) 
+      fout << setw(5) << header_names[i] << "  ";
   fout << endl;
   for (auto i : recs) {
     i.report(st, fout);
