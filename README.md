@@ -45,9 +45,9 @@ Then it will add each number in colume 0 with each number in colume 2 and create
 The resule will be:
 
 line   0      1      2      3    new
-0:     1      3      4      5  5.000000
-1:     2      3      1      2  3.000000
-2:     2      6      2      1  4.000000
+0:     1      3      4      5  5.000000<br>
+1:     2      3      1      2  3.000000<br>
+2:     2      6      2      1  4.000000<br>
 
 Also note that to multiply it's col1xcol2 instead of col1*col2
 
